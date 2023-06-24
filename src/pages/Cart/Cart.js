@@ -1,6 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
 import { WrapperContainer } from "../../components";
-import { HomeLayout } from "../../layouts";
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,9 +42,9 @@ const CartPage = () => {
   const decreaseHandler = (Product) => {
     dispatch(decrementProduct(Product.id));
   };
-  // const saveClick = async() => {
-  //   navigate("../home", { replace: true });
-  // };
+  const navigateToWalletPage = async () => {
+    window.location = "/mywallet";
+  };
   return (
     <React.Fragment>
       <WrapperContainer
@@ -91,10 +90,9 @@ const CartPage = () => {
           size="large"
           positionEnd={true}
           sx={{ backgroundColor: "#84C7C4", width: "30%" }}
+          onClick={() => navigateToWalletPage()}
         >
-          <a href="/home" id="saveTag">
-            Sepeti onayla
-          </a>
+          Sepeti onayla
         </Button>
       )}
     </React.Fragment>
