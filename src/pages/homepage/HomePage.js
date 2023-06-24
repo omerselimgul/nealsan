@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { HomeLayout } from "../../layouts";
-import { Button, Card, Input } from "../../mui-base";
 import { IconButton, InputAdornment } from "@mui/material";
-import { SearchIcon } from "../../mui-base/Icons";
-import { WrapperContainer } from "../../components";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
+import React, { useEffect, useState } from "react";
+import { WrapperContainer } from "../../components";
 import Categories from "../../constant/Categories";
+import { db } from "../../firebase/firebase";
+import { Button, Card, Input } from "../../mui-base";
+import { SearchIcon } from "../../mui-base/Icons";
 
 const HomePage = ({ isNotAuth }) => {
   const [products, setProducts] = useState([]);

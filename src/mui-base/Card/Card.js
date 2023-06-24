@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { ShoppingCartIcon } from "../Icons";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useAuth } from "../../context/UserContext";
 import { incrementProduct } from "../../redux/features/countOfProducts/counterOfProductsSlice";
 import { decrementWallet } from "../../redux/features/wallet/walletSlice";
 import "./Card.css";
-import { useAuth } from "../../context/UserContext";
 const BaseCard = (props) => {
   const { user } = useAuth();
   const countOfProducts = useSelector((state) => state.countOfProducts);
@@ -22,9 +21,12 @@ const BaseCard = (props) => {
           return (
             <div id="AddCartContainer">
               <img id="AddCartImg" src="images/pureAddToCart.png" alt="" />
-              {countOfProducts[props.productId] > 0 && (
-                <div id="Counter">{countOfProducts[props.productId]}</div>
-              )}
+
+              <div id="Counter">
+                {countOfProducts[props.productId] > 0
+                  ? countOfProducts[props.productId]
+                  : "+"}
+              </div>
             </div>
           );
 
