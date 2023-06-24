@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 
 const WrapperContainer = (props) => {
   const [data, setData] = useState([]);
-  const [style, setStyle] = useState({ width: "100%" });
+  const [style, setStyle] = useState({ width: "100%", overflow: "auto" });
   useEffect(() => {
     if (props?.children) {
       if (
@@ -36,8 +36,9 @@ const WrapperContainer = (props) => {
     <Grid
       style={style}
       {...props}
+      rowGap={props?.rowGap || 2}
       container
-      spacing={props?.spacing || 2}
+      // spacing={props?.spacing || 2}
       // columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       columns={props?.columns || 13}
       margin="1rem 0rem"

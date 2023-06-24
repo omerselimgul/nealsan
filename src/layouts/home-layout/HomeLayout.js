@@ -88,14 +88,7 @@ const HomeLayout = (props, isAuth) => {
   };
   return (
     <div>
-      {/* {navbar()} */}
-      <WrapperContainer
-        spacing={1}
-        sx={{
-          padding: "0px 4%",
-        }}
-        AlignItemsCenter
-      >
+      <WrapperContainer AlignItemsCenter>
         <div xs={props?.isAuth ? 5 : 10} className="navbar-left">
           <a href={user ? "/home" : "/"} alt="">
             <img src={"images/nealsam.jpg"} alt="" width="200px"></img>
