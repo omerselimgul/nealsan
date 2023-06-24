@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { incrementProduct } from "../../redux/features/countOfProducts/counterOfProductsSlice";
 import { decrementWallet } from "../../redux/features/wallet/walletSlice";
 import "./Card.css";
+import { useAuth } from "../../context/UserContext";
 const BaseCard = (props) => {
+  const { user } = useAuth();
   const countOfProducts = useSelector((state) => state.countOfProducts);
   const dispatch = useDispatch();
   const IconSelect = () => {
@@ -32,9 +34,13 @@ const BaseCard = (props) => {
     }
   };
   const AddToCardHandler = () => {
-    dispatch(incrementProduct(props.productId));
-    const priceOfProduct = parseInt(props.price.replace(".", ""));
-    dispatch(decrementWallet(priceOfProduct));
+    if (user) {
+      dispatch(incrementProduct(props.productId));
+      const priceOfProduct = parseInt(props.price.replace(".", ""));
+      dispatch(decrementWallet(priceOfProduct));
+    } else {
+      window.location = "/login";
+    }
   };
   return (
     <div style={{ width: "100%", display: "inline-block", margin: "0px" }}>
@@ -75,7 +81,11 @@ const BaseCard = (props) => {
             </div>
             <CardActions disableSpacing>
               <IconButton
-                onClick={props?.Icon === "AddCart" ? AddToCardHandler : null}
+                onClick={
+                  props?.Icon === "AddCart"
+                    ? AddToCardHandler
+                    : props?.IconClick || null
+                }
                 sx={{ backgroundColor: "#C3ECEA", padding: "0px" }}
               >
                 {IconSelect()}

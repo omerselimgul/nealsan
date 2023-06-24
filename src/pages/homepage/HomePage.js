@@ -153,7 +153,7 @@ const HomePage = ({ isNotAuth }) => {
               price={product.Price}
               stock={product.Stock}
               Path={product.Path}
-              Icon={isNotAuth ? "" : "AddCart"}
+              Icon={"AddCart"}
             />
           );
         })}
