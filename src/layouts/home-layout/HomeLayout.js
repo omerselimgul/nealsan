@@ -17,14 +17,13 @@ const HomeLayout = (props, isAuth) => {
 
   useEffect(() => {
     walletHandler();
-  }, [countOfProducts]);
+  }, [countOfProducts, user]);
 
   const walletHandler = async () => {
-    const coll = await getDocs(productsCollcetionRef);
+    if (countOfProducts && user) {
+      const coll = await getDocs(productsCollcetionRef);
 
-    const data = coll.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-
-    if (countOfProducts && data?.length > 0) {
+      const data = coll.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       let calculatedWallet = 30000;
       data.map((pro) => {
         if (countOfProducts[pro.id]) {
@@ -88,7 +87,7 @@ const HomeLayout = (props, isAuth) => {
   };
   return (
     <div>
-      <WrapperContainer AlignItemsCenter>
+      <WrapperContainer AlignItemsCenter sx={{ padding: "0px 4%" }}>
         <div xs={props?.isAuth ? 5 : 10} className="navbar-left">
           <a href={user ? "/home" : "/"} alt="">
             <img src={"images/nealsam.jpg"} alt="" width="200px"></img>
