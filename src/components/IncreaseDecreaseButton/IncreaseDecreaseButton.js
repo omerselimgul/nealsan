@@ -9,8 +9,8 @@ const IncreaseDecreaseButton = ({
   return (
     <div
       style={{
-        width: "10rem",
-        height: "50px",
+        width: "8rem",
+        height: "40px",
         backgroundColor: "#C3ECEA",
         borderRadius: "30px ",
         padding: "5px 0px",

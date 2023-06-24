@@ -52,7 +52,6 @@ const CartPage = () => {
         sx={{
           backgroundColor: "#edf9f8",
           padding: "1% 4%",
-          boxSizing: "border-box",
         }}
       >
         <div xs={2} className="navbar-right">
@@ -65,12 +64,11 @@ const CartPage = () => {
           <WrapperContainer
             sx={{
               padding: "1% 4%",
-              boxSizing: "border-box",
               height: "200px",
-              alignItems: "center",
               color: "#349590",
             }}
-            spacing={4}
+            AlignItemsCenter
+            ContentCenter
           >
             <img xs={2} src={pro?.Path} height="150px" alt="" />
             <div xs={6}>

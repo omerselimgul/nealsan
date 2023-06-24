@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, WrapperContainer } from "../../components";
+import { BarChart, WrapperContainer } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
@@ -8,18 +8,46 @@ import {
   incrementProduct,
 } from "../../redux/features/countOfProducts/counterOfProductsSlice";
 import { IncreaseDecreaseButton } from "../../components/IncreaseDecreaseButton";
+import Categories from "../../constant/Categories";
 
 const WalletPage = () => {
   const wallet = useSelector((state) => state.wallet);
   const productsCollcetionRef = collection(db, "Products");
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [chartData, setChartData] = useState();
   const countOfProducts = useSelector((state) => state.countOfProducts);
   const [totalAmount, setTotalAmount] = useState(0);
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     getData();
   }, [countOfProducts]);
+
+  useEffect(() => {
+    let data = {};
+    selectedProducts.map((pro) => {
+      data = {
+        ...data,
+        [pro.Category]: data[pro.Category]
+          ? data[pro.Category] + pro.Amount * pro.Price.replace(".", "")
+          : pro.Amount * pro.Price.replace(".", ""),
+      };
+    });
+
+    for (let i = 0; i < Categories.length; i++) {
+      let CategoryId = Categories[i].id;
+      if (!data[CategoryId]) {
+        data[CategoryId] = "0 TL";
+      }
+      data = {
+        ...data,
+        [Categories[i].name]: data[CategoryId],
+      };
+      delete data[CategoryId];
+    }
+    setChartData(data);
+  }, [selectedProducts]);
+
   const getData = async () => {
     const coll = await getDocs(productsCollcetionRef);
     const data = coll.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
@@ -77,16 +105,17 @@ const WalletPage = () => {
                 xs={12}
                 sx={{
                   boxSizing: "border-box",
-                  height: "200px",
+                  height: "150px",
                   border: "1px solid black",
-                  alignItems: "center",
                   color: "#349590",
                 }}
-                spacing={4}
+                AlignItemsCenter
+                ContentCenter
+                // spacing={4}
               >
-                <img xs={3} src={pro?.Path} height="150px" alt="" />
+                <img xs={3} src={pro?.Path} height="130px" alt="" />
                 <div xs={3}>
-                  <h2>{pro.ProductName}</h2>
+                  <h3>{pro.ProductName}</h3>
                   <h5>{pro.Stock} Adet Sınırlı</h5>
                 </div>
                 <IncreaseDecreaseButton
@@ -95,7 +124,7 @@ const WalletPage = () => {
                   increaseHandler={() => increaseHandler(pro)}
                   decreaseHandler={() => decreaseHandler(pro)}
                 />
-                <h2 xs={3}>{pro?.Price} TL</h2>
+                <h3 xs={3}>{pro?.Price} TL</h3>
               </WrapperContainer>
             ))}
         </div>
@@ -108,7 +137,7 @@ const WalletPage = () => {
               padding: "1% 5%",
             }}
             AlignItemsCenter
-            spacing={0}
+            // spacing={0}
           >
             <WrapperContainer xs={12} Height="30px">
               <span xs={8}>Toplam bakiyeniz :</span>
@@ -131,6 +160,10 @@ const WalletPage = () => {
           </WrapperContainer>
         </div>
       </WrapperContainer>
+      <BarChart
+        chartData={chartData}
+        Amount={wallet ? 30000 - parseInt(wallet) : 0}
+      />
     </React.Fragment>
   );
 };

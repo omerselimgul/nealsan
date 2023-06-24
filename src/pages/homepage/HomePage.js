@@ -6,28 +6,8 @@ import { SearchIcon } from "../../mui-base/Icons";
 import { WrapperContainer } from "../../components";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
-const Categories = [
-  {
-    name: "Teknoloji",
-    id: 1,
-  },
-  {
-    name: "Giyim",
-    id: 2,
-  },
-  {
-    name: "Kozmetik",
-    id: 3,
-  },
-  {
-    name: "Mobilya",
-    id: 4,
-  },
-  {
-    name: "Aksesuar",
-    id: 5,
-  },
-];
+import Categories from "../../constant/Categories";
+
 const HomePage = ({ isNotAuth }) => {
   const [products, setProducts] = useState([]);
   const [filteredData, setFilteredData] = useState();
@@ -162,7 +142,7 @@ const HomePage = ({ isNotAuth }) => {
           onClick={(event) => filterHandler("Category", Categories[4].id)}
         />
       </WrapperContainer>
-      <WrapperContainer sx={{ padding: "2% 4%" }} AlignItemsCenter>
+      <WrapperContainer AlignItemsCenter sx={{ paddingLeft: "5%" }}>
         {filteredData?.map((product) => {
           return (
             <Card

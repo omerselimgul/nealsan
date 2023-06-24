@@ -13,7 +13,7 @@ const BasicButtons = (props) => {
         width: "90%",
       });
     }
-  }, []);
+  }, [props?.positionEnd]);
   return (
     <Stack style={style} sx={{ width: "100%" }}>
       <Button {...props}>
