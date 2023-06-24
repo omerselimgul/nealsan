@@ -1,0 +1,27 @@
+.navbar {
+  color: #349590;
+  width: 100%;
+  min-height: 2rem;
+  background-color: #fefefe;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  box-sizing: border-box;
+}
+.navbar-right {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+a {
+  text-decoration: none;
+  color: #349590;
+}
+a:hover {
+  cursor: pointer;
+}
+a:visited {
+  color: #349590;
+}
