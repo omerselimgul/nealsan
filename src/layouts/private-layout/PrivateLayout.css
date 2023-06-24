@@ -1,0 +1,26 @@
+.navbar {
+  color: #349590;
+  width: 100%;
+  min-height: 2rem;
+  background-color: #fefefe;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  box-sizing: border-box;
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loginButton {
+  text-decoration: none;
+}
+.loginButton:hover {
+  cursor: pointer;
+}
+.loginButton:visited {
+  color: #349590;
+}

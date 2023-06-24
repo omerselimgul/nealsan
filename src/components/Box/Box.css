@@ -1,0 +1,8 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: max-content;
+  gap: 1rem;
+}

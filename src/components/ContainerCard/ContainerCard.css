@@ -1,0 +1,13 @@
+.Container {
+  background-color: #edf9f8;
+  width: 100%;
+  height: max-content;
+  padding: 5% 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+  box-sizing: border-box;
+  color: #84c7c4;
+  margin-bottom: 1rem;
+}

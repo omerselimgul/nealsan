@@ -1,0 +1,9 @@
+.ProductsContainer {
+  display: flex;
+  padding: 0px 2%;
+  justify-content: center;
+  gap: 50px;
+}
+.MainContainer {
+  height: min-content;
+}
