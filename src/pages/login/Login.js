@@ -76,6 +76,7 @@ const Login = () => {
           error={helperText}
         />
         <Input
+          type="password"
           fullWidth
           label="Şifreniz"
           variant="standard"
