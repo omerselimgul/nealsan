@@ -3,7 +3,10 @@ import { Box, ContainerCard } from "../../components";
 
 import { Button, Input } from "../../mui-base";
 import { auth } from "../../firebase/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/UserContext";
 const Login = () => {
@@ -21,10 +24,33 @@ const Login = () => {
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
       if (userInfo) {
-        navigate("/", { replace: true });
+        navigate("/home", { replace: true });
       }
     } catch (error) {
-      setHelperText(error?.message.split(":")[1]);
+      if (error?.message.includes("user-not-found")) {
+        register(email, password);
+      } else {
+        setHelperText(error?.message.split(":")[1]);
+      }
+    }
+  };
+  const register = async (email, password) => {
+    try {
+      console.log(email, password);
+      const userInfo = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userInfo) {
+        navigate("/home", { replace: true });
+      }
+    } catch (error) {
+      if (error?.message.includes("user-not-found")) {
+        console.log("test");
+      } else {
+        setHelperText(error?.message.split(":")[1]);
+      }
     }
   };
   const loginHandler = () => {
